@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul,
+ol {
+    list-style: none;
+}
+
+#loveandpeace {
+    display: -webkit-box;
+    display: box;
+}
+
+
+#large {
+    width: 200px;
+    border-right: 1px solid #ddd;
+}
+
+
+#small {
+    width: 200px;
+    border-right: 1px solid #ddd;
+}
+
+
+#mini {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
