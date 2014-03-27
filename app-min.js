@@ -40,7 +40,11 @@ Bear.utils = (function() {
 var jsonpCallback = function(data) {
     var html = ''
     for (var i = 0, l = data.list.length; i < l; i++) {
-        html += '<li>' + data.list[i].name + '</li>'
+        if (data.list[i].link) {
+            html += '<li><a href="' + data.list[i].link + '">' + data.list[i].name + '</a></li>'
+        } else {
+            html += '<li>' + data.list[i].name + '</li>'
+        }
     }
     document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
 };

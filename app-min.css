@@ -7,6 +7,14 @@ ol {
     list-style: none;
 }
 
+html {
+    font-size: 100%;
+}
+body {
+    line-height: 1.6;
+}
+
+
 #loveandpeace {
     display: -webkit-box;
     display: box;
@@ -17,11 +25,21 @@ ol {
     width: 200px;
     border-right: 1px solid #ddd;
 }
+#large li {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    cursor: pointer;
+}
 
 
 #small {
     width: 200px;
     border-right: 1px solid #ddd;
+}
+#small li {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    cursor: pointer;
 }
 
 
