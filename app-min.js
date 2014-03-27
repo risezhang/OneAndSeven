@@ -1,4 +1,51 @@
-+function() {
+var Bear = {};
+
+Bear.utils = (function() {
+    var obj = {}
+    obj.loadScript = function(url, callback) {
+        var doc = document
+        var script = doc.createElement('script')
+
+        if (script.readyState) { // IE
+            script.onreadystatechange = function () {
+                if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                    script.onreadystatechange = null
+                    callback(script)
+                }
+            };
+        } else {
+            script.onload = function () {
+                callback(script)
+            }
+        }
+
+        script.src = url
+        doc.body.appendChild(script)
+    }
+    obj.loadScriptString = function(code, callback) {
+        var doc = document
+        var script = doc.createElement('script')
+        try { // Safari 3.0 之前的版本不能正确地支持 text 属性
+            script.appendChild(doc.createTextNode(code))
+        } catch(ex) { // IE 将<script>视为一个特殊的元素，不允许 DOM 访问其子节点
+            script.text = code
+        }
+        doc.body.appendChild(script)
+        callback(script)
+    }
+
+    return obj
+})();
+
+var jsonpCallback = function(data) {
+    var html = ''
+    for (var i = 0, l = data.list.length; i < l; i++) {
+        html += '<li>' + data.list[i].name + '</li>'
+    }
+    document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
+};
+
++function(Bear) {
     var doc = document
 
     var Island = function() {
@@ -6,31 +53,12 @@
         this.small = doc.getElementById('small')
         this.mini = doc.getElementById('mini')
     }
-    Island.prototype.getJSON = function(url, callback) {
-        var xhr = new XMLHttpRequest()
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                    callback(xhr.responseText)
-                }
-            }
-        }
-        xhr.open('get', url, true)
-        xhr.send(null)
-    }
-    Island.prototype.setSmall = function(data) {
-        var html = ''
-        for (var i = 0, l = data.list.length; i < l; i++) {
-            html += '<li>' + data.list.name + '</li>'
-        }
-        this.small.innerHTML = '<ul>' + html + '</ul>'
-    }
-    Island.prototype.getSmall = function(id) {
-        this.getJSON('data/' + id + '.json', this.setSmall)
-    }
     Island.prototype.handleEvent = function(event) {
         if (event.currentTarget.id == 'large' && event.target.className == 'item') {
-            this.getSmall(event.target.getAttribute('data-id'))
+            Bear.utils.loadScript('data/' + event.target.getAttribute('data-id') + '.js', function(script) {
+                script.parentNode.removeChild(script)
+                script = null
+            })
         }
     }
     Island.prototype.proxy = function(fn, context) {
@@ -44,4 +72,4 @@
 
     var island = new Island()
     island.init()
-}();
+}(Bear);

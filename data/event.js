@@ -1,0 +1,6 @@
+jsonpCallback(
+{
+    "type": "event",
+    "list": []
+}
+)
