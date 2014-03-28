@@ -13,7 +13,9 @@ html {
 body {
     line-height: 1.6;
 }
-
+a {
+    text-decoration: none;
+}
 
 #loveandpeace {
     display: -webkit-box;
@@ -25,7 +27,7 @@ body {
     width: 200px;
     border-right: 1px solid #ddd;
 }
-#large li {
+#large .item {
     padding-right: 0.5em;
     padding-left: 0.5em;
     cursor: pointer;
@@ -36,10 +38,13 @@ body {
     width: 200px;
     border-right: 1px solid #ddd;
 }
-#small li {
+#small .item {
     padding-right: 0.5em;
     padding-left: 0.5em;
     cursor: pointer;
+}
+#small .link {
+    margin-left: 0.5em;
 }
 
 
