@@ -6,7 +6,7 @@ jsonpCallback(
         {
             "name": "来自星星的你",
             "area": "韩国",
-            "time": "2014.2.8",
+            "time": "2014/02/08",
             "id": ""
         },
         {
@@ -43,7 +43,6 @@ jsonpCallback(
         {
             "name": "野猪大改造",
             "area": "日本",
-            "picture": "uploads/tv0001.jpg",
             "time": "",
             "id": ""
         },

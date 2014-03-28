@@ -1,6 +1,7 @@
 jsonpCallback(
 {
     "type": "comics",
+    "area": ["日本", "中国"],
     "list": [
         {
             "name": "i’s",
@@ -25,6 +26,11 @@ jsonpCallback(
         {
             "name": "看上去很美的太阳照常升起",
             "area": "中国",
+            "id": ""
+        },
+        {
+            "name": "小恐龙阿贡",
+            "area": "日本",
             "id": ""
         },
         {

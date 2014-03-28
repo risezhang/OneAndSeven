@@ -1,7 +1,6 @@
 jsonpCallback(
 {
     "type": "site",
-    "area": [],
     "list": [
         {
             "name": "TOPIT.ME",
@@ -32,6 +31,41 @@ jsonpCallback(
             "name": "汉典",
             "id": "",
             "link": "http://www.zdic.net/"
+        },
+        {
+            "name": "Facebook",
+            "id": "",
+            "link": "https://zh-cn.facebook.com/"
+        },
+        {
+            "name": "Twitter",
+            "id": "",
+            "link": "https://twitter.com/"
+        },
+        {
+            "name": "YouTube",
+            "id": "",
+            "link": "http://www.youtube.com/"
+        },
+        {
+            "name": "Tumblr",
+            "id": "",
+            "link": "https://www.tumblr.com/"
+        },
+        {
+            "name": "Pinterest",
+            "id": "",
+            "link": "http://www.pinterest.com/"
+        },
+        {
+            "name": "dribbble",
+            "id": "",
+            "link": "http://dribbble.com/"
+        },
+        {
+            "name": "豆瓣",
+            "id": "",
+            "link": "http://www.douban.com/"
         }
     ]
 }

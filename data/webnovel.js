@@ -1,7 +1,6 @@
 jsonpCallback(
 {
     "type": "webnovel",
-    "area": [],
     "list": [
         {
             "name": "紫川",
@@ -48,15 +47,15 @@ jsonpCallback(
             "id": ""
         },
         {
-            "name": "紫川",
-            "id": ""
-        },
-        {
             "name": "宰执天下",
             "id": ""
         },
         {
             "name": "东方云梦谭",
+            "id": ""
+        },
+        {
+            "name": "阿里不达年代记",
             "id": ""
         },
         {
@@ -80,11 +79,15 @@ jsonpCallback(
             "id": ""
         },
         {
-            "name": "阿里不达年代记",
+            "name": "但爱鲈鱼美",
             "id": ""
         },
         {
             "name": "回到明朝当王爷",
+            "id": ""
+        },
+        {
+            "name": "到开封府混个公务员",
             "id": ""
         },
         {
@@ -104,6 +107,5 @@ jsonpCallback(
             "id": ""
         }
     ]
-
 }
 )

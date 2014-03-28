@@ -1,6 +1,11 @@
 jsonpCallback(
 {
     "type": "people",
-    "list": []
+    "list": [
+		{
+            "name": "水原希子",
+            "id": ""
+        }
+    ]
 }
 )

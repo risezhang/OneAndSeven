@@ -1,12 +1,19 @@
 jsonpCallback(
 {
     "type": "animation",
+    "area": ["日本", "美国", "香港"],
     "list": [
         {
             "name": "银河英雄传说",
             "area": "日本",
             "id": "",
-            "time": "2014.2"
+            "time": "2014/02"
+        },
+        {
+            "name": "只有神知道的世界",
+            "area": "日本",
+            "id": "",
+            "time": "2014/03"
         },
         {
             "name": "fractale",
