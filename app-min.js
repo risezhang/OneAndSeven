@@ -37,6 +37,15 @@ Bear.utils = (function() {
     return obj
 })();
 
+var setSmall = function(a, b) {
+    var html = ''
+    for (var i = 0, l = data.list.length; i < l; i++) {
+        if (data.list[i][a] == b) {
+            html += '<li class="item">' + data.list[i].name + '</li>'
+        }
+    }
+}
+
 var jsonpCallback = function(data) {
     var html = ''
     for (var i = 0, l = data.list.length; i < l; i++) {
