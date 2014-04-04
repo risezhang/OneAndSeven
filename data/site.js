@@ -58,6 +58,11 @@ jsonpCallback(
             "link": "http://www.pinterest.com/"
         },
         {
+            "name": "vevo",
+            "id": "",
+            "link": "http://www.vevo.com/"
+        },
+        {
             "name": "dribbble",
             "id": "",
             "link": "http://dribbble.com/"
