@@ -1,12 +1,12 @@
 var Bear = {};
 
-Bear.utils = (function() {
+Bear.utils = (function(doc) {
     var obj = {}
+
     obj.loadScript = function(url, callback) {
-        var doc = document
         var script = doc.createElement('script')
 
-        if (script.readyState) { // IE
+        if (script.readyState) {
             script.onreadystatechange = function () {
                 if (script.readyState == 'loaded' || script.readyState == 'complete') {
                     script.onreadystatechange = null
@@ -22,12 +22,12 @@ Bear.utils = (function() {
         script.src = url
         doc.body.appendChild(script)
     }
+
     obj.loadScriptString = function(code, callback) {
-        var doc = document
         var script = doc.createElement('script')
-        try { // Safari 3.0 之前的版本不能正确地支持 text 属性
+        try {
             script.appendChild(doc.createTextNode(code))
-        } catch(ex) { // IE 将<script>视为一个特殊的元素，不允许 DOM 访问其子节点
+        } catch(ex) {
             script.text = code
         }
         doc.body.appendChild(script)
@@ -35,37 +35,29 @@ Bear.utils = (function() {
     }
 
     return obj
-})();
-
-var setSmall = function(a, b) {
-    var html = ''
-    for (var i = 0, l = data.list.length; i < l; i++) {
-        if (data.list[i][a] == b) {
-            html += '<li class="item">' + data.list[i].name + '</li>'
-        }
-    }
-}
+})(document);
 
 var jsonpCallback = function(data) {
     var html = ''
     for (var i = 0, l = data.list.length; i < l; i++) {
+        html += '<li class="item">' + data.list[i].name
         if (data.list[i].link) {
-            html += '<li class="item">' + data.list[i].name + '<a class="link" href="' + data.list[i].link + '">&#8674;</a></li>'
-        } else {
-            html += '<li class="item">' + data.list[i].name + '</li>'
+            html += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
         }
+        html += '</li>'
     }
     document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
 };
 
-+function(Bear) {
-    var doc = document
-
++function(Bear, doc) {
     var Island = function() {
         this.large = doc.getElementById('large')
         this.small = doc.getElementById('small')
         this.mini = doc.getElementById('mini')
+
+        this.init()
     }
+
     Island.prototype.handleEvent = function(event) {
         if (event.currentTarget.id == 'large' && event.target.className == 'item') {
             Bear.utils.loadScript('data/' + event.target.getAttribute('data-id') + '.js', function(script) {
@@ -74,15 +66,20 @@ var jsonpCallback = function(data) {
             })
         }
     }
+
     Island.prototype.proxy = function(fn, context) {
         return function(event) {
-            return fn.apply(context, arguments)
+            fn.apply(context, arguments)
         }
     }
+
     Island.prototype.init = function() {
         this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
     }
 
-    var island = new Island()
-    island.init()
-}(Bear);
+    Bear.island = function() {
+        new Island()
+    }
+}(Bear, document);
+
+Bear.island();

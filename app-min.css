@@ -2,29 +2,25 @@
     margin: 0;
     padding: 0;
 }
-ul,
-ol {
+ul {
     list-style: none;
-}
-
-html {
-    font-size: 100%;
-}
-body {
-    line-height: 1.6;
 }
 a {
     text-decoration: none;
 }
 
-#loveandpeace {
-    display: -webkit-box;
-    display: box;
+body {
+    line-height: 1.6;
 }
 
-
 #large {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
     width: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
     border-right: 1px solid #ddd;
 }
 #large .item {
@@ -33,9 +29,14 @@ a {
     cursor: pointer;
 }
 
-
 #small {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 201px;
     width: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
     border-right: 1px solid #ddd;
 }
 #small .item {
@@ -45,10 +46,4 @@ a {
 }
 #small .link {
     margin-left: 0.5em;
-}
-
-
-#mini {
-    -webkit-box-flex: 1;
-    box-flex: 1;
 }
