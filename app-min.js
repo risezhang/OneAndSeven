@@ -37,18 +37,6 @@ Bear.utils = (function(doc) {
     return obj
 })(document);
 
-var jsonpCallback = function(data) {
-    var html = ''
-    for (var i = 0, l = data.list.length; i < l; i++) {
-        html += '<li class="item">' + data.list[i].name
-        if (data.list[i].link) {
-            html += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
-        }
-        html += '</li>'
-    }
-    document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
-};
-
 +function(Bear, doc) {
     var Island = function() {
         this.large = doc.getElementById('large')
@@ -77,9 +65,24 @@ var jsonpCallback = function(data) {
         this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
     }
 
-    Bear.island = function() {
-        new Island()
+    Island.prototype.jsonpCallback = function(data) {
+        var html = ''
+        for (var i = 0, l = data.list.length; i < l; i++) {
+            html += '<li class="item">' + data.list[i].name
+            if (data.list[i].link) {
+                html += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
+            }
+            html += '</li>'
+        }
+        document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
+    }
+
+    Bear.island = function(element) {
+        if (!element.island) {
+            element.island = new Island()
+        }
+        return element.island
     }
 }(Bear, document);
 
-Bear.island();
+Bear.island(document.getElementById('loveandpeace'))

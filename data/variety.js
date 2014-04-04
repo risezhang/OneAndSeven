@@ -1,4 +1,4 @@
-jsonpCallback(
+Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "variety",
     "area": ["日本", "台湾", "中国"],

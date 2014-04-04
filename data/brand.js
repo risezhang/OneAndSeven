@@ -1,4 +1,4 @@
-jsonpCallback(
+Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "brand",
     "list": [
