@@ -4,6 +4,18 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
     "area": ["日本", "美国", "香港"],
     "list": [
         {
+            "name": "虫师",
+            "area": "日本",
+            "id": "",
+            "time": "2014/04/05"
+        },
+        {
+            "name": "日常",
+            "area": "日本",
+            "id": "",
+            "time": "2014/04/05"
+        },
+        {
             "name": "银河英雄传说",
             "area": "日本",
             "id": "",
