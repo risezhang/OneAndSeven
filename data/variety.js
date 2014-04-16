@@ -1,7 +1,9 @@
 Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "variety",
-    "area": ["日本", "台湾", "中国"],
+    "filter": {
+        "area": ["日本", "台湾", "中国"]
+    },
     "list": [
         {
             "name": "超级全能住宅改造王",

@@ -1,7 +1,9 @@
 Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "tv",
-    "area": ["韩国", "香港", "日本", "英国"],
+    "filter": {
+        "area": ["韩国", "香港", "日本", "英国"]
+    },
     "list": [
         {
             "name": "冰与火之歌:权力的游戏 第4季01 双剑",

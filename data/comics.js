@@ -1,7 +1,9 @@
 Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "comics",
-    "area": ["日本", "中国"],
+    "filter": {
+        "area": ["日本", "中国"]
+    }, 
     "list": [
         {
             "name": "i’s",

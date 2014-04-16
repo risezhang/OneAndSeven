@@ -1,7 +1,9 @@
 Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "animation",
-    "area": ["日本", "美国", "香港"],
+    "filter": {
+        "area": ["日本", "美国", "香港"]
+    },
     "list": [
         {
             "name": "虫师",

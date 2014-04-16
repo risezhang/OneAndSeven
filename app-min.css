@@ -29,11 +29,27 @@ body {
     cursor: pointer;
 }
 
-#small {
+#filter {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 201px;
+    width: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+}
+#filter .item {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    cursor: pointer;
+}
+
+#small {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 402px;
     width: 200px;
     overflow-x: hidden;
     overflow-y: auto;

@@ -40,8 +40,10 @@ Bear.utils = (function(doc) {
 +function(Bear, doc) {
     var Island = function() {
         this.large = doc.getElementById('large')
+        this.filter = doc.getElementById('filter')
         this.small = doc.getElementById('small')
         this.mini = doc.getElementById('mini')
+        this.data = null
 
         this.init()
     }
@@ -52,29 +54,67 @@ Bear.utils = (function(doc) {
                 script.parentNode.removeChild(script)
                 script = null
             })
+        } else if (event.currentTarget.id == 'filter' && event.target.className == 'item') {
+            var smallHTML = this.getSmallHTML(this.data, event.target.getAttribute('data-filter'), event.target.innerHTML)
+            smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
         }
+    }
+
+    Island.prototype.getSmallHTML = function(data, key, value) {
+        var html = ''
+        var part = ''
+
+        for (var i = 0, l = data.list.length; i < l; i++) {
+            part += '<li class="item">' + data.list[i].name
+            if (data.list[i].link) {
+                part += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
+            }
+            part += '</li>'
+            if (key && value && data.list[i][key] != value) {
+                part = ''
+            }
+            html += part
+            part = ''           
+        }
+        
+        return html
     }
 
     Island.prototype.proxy = function(fn, context) {
         return function(event) {
-            fn.apply(context, arguments)
+            return fn.apply(context, arguments)
         }
     }
 
     Island.prototype.init = function() {
         this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
+        this.filter.addEventListener('click', this.proxy(this.handleEvent, this), false)
     }
 
     Island.prototype.jsonpCallback = function(data) {
-        var html = ''
-        for (var i = 0, l = data.list.length; i < l; i++) {
-            html += '<li class="item">' + data.list[i].name
-            if (data.list[i].link) {
-                html += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
+        var smallHTML = this.getSmallHTML(data, null, null)
+
+        var filterHTML = ''
+        if (data.filter) {
+            if (data.filter.area) {
+                for (var i = 0, l = data.filter.area.length; i < l; i++) {
+                    filterHTML += '<li class="item" data-filter="area">' + data.filter.area[i] + '</li>'
+                }
             }
-            html += '</li>'
         }
-        document.getElementById('small').innerHTML = '<ul>' + html + '</ul>'
+
+        if (filterHTML) {
+            this.filter.innerHTML = '<ul>' + filterHTML + '</ul>'
+        } else {
+            this.filter.innerHTML = ''
+        }
+        if (smallHTML) {
+            this.small.innerHTML = '<ul>' + smallHTML + '</ul>'
+        } else {
+            this.small.innerHTML = ''
+        }
+
+        this.data = data
     }
 
     Bear.island = function(element) {

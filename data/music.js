@@ -1,7 +1,9 @@
 Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "music",
-    "area": ["台湾", "香港", "中国"],
+    "filter": {
+        "area": ["台湾", "香港", "中国"]
+    },
     "list": [
         {
             "name": "借口",
