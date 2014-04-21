@@ -63,3 +63,8 @@ body {
 #small .link {
     margin-left: 0.5em;
 }
+
+#mini {
+    margin-left: 603px;
+    padding: 0.5em;
+}

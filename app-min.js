@@ -57,6 +57,15 @@ Bear.utils = (function(doc) {
         } else if (event.currentTarget.id == 'filter' && event.target.className == 'item') {
             var smallHTML = this.getSmallHTML(this.data, event.target.getAttribute('data-filter'), event.target.innerHTML)
             smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
+        } else if (event.currentTarget.id == 'small' && event.target.className == 'item') {
+            var tagid = event.target.getAttribute('data-id')
+            if (tagid) {
+                this.small.setAttribute('data-currentid', tagid)
+                Bear.utils.loadScript('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js', function(script) {
+                    script.parentNode.removeChild(script)
+                    script = null
+                }) 
+            }
         }
     }
 
@@ -65,7 +74,11 @@ Bear.utils = (function(doc) {
         var part = ''
 
         for (var i = 0, l = data.list.length; i < l; i++) {
-            part += '<li class="item">' + data.list[i].name
+            part += '<li class="item"'
+            if (data.list[i].id) {
+                part += ' data-id="' + data.list[i].id + '"'
+            }
+            part += '>' + data.list[i].name
             if (data.list[i].link) {
                 part += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
             }
@@ -89,32 +102,52 @@ Bear.utils = (function(doc) {
     Island.prototype.init = function() {
         this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
         this.filter.addEventListener('click', this.proxy(this.handleEvent, this), false)
+        this.small.addEventListener('click', this.proxy(this.handleEvent, this), false)
     }
 
     Island.prototype.jsonpCallback = function(data) {
-        var smallHTML = this.getSmallHTML(data, null, null)
-
-        var filterHTML = ''
-        if (data.filter) {
-            if (data.filter.area) {
-                for (var i = 0, l = data.filter.area.length; i < l; i++) {
-                    filterHTML += '<li class="item" data-filter="area">' + data.filter.area[i] + '</li>'
+        if (data.type == 'post') {
+            var currentid = this.small.getAttribute('data-currentid')
+            for (var i = 0, l = data.list.length; i < l; i++) {
+                if (data.list[i].tagid == currentid) {
+                    var articles = data.list[i].article
+                    var articlesHTML = ''
+                    for (var i = 0, l = articles.length; i < l; i++) {
+                        switch (articles[i].type) {
+                            case 'picture':
+                                articlesHTML += '<article class="module-picture"><img src="' + articles[i].content + '"></article>'
+                                break
+                        }
+                    }
+                    this.mini.innerHTML = articlesHTML
+                    break
                 }
             }
-        }
-
-        if (filterHTML) {
-            this.filter.innerHTML = '<ul>' + filterHTML + '</ul>'
         } else {
-            this.filter.innerHTML = ''
-        }
-        if (smallHTML) {
-            this.small.innerHTML = '<ul>' + smallHTML + '</ul>'
-        } else {
-            this.small.innerHTML = ''
-        }
+            var smallHTML = this.getSmallHTML(data, null, null)
 
-        this.data = data
+            var filterHTML = ''
+            if (data.filter) {
+                if (data.filter.area) {
+                    for (var i = 0, l = data.filter.area.length; i < l; i++) {
+                        filterHTML += '<li class="item" data-filter="area">' + data.filter.area[i] + '</li>'
+                    }
+                }
+            }
+
+            if (filterHTML) {
+                this.filter.innerHTML = '<ul>' + filterHTML + '</ul>'
+            } else {
+                this.filter.innerHTML = ''
+            }
+            if (smallHTML) {
+                this.small.innerHTML = '<ul>' + smallHTML + '</ul>'
+            } else {
+                this.small.innerHTML = ''
+            }
+
+            this.data = data
+        }
     }
 
     Bear.island = function(element) {

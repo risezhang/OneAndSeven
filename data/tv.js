@@ -52,7 +52,7 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
             "name": "野猪大改造",
             "area": "日本",
             "time": "",
-            "id": ""
+            "id": "1"
         },
         {
             "name": "神探夏洛克",
