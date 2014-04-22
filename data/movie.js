@@ -2,7 +2,7 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 {
     "type": "movie",
     "filter": {
-        "area": ["台湾", "香港", "美国", "韩国"]
+        "area": ["台湾", "香港", "美国", "韩国", "日本"]
     },
     "list": [
         {
@@ -14,6 +14,11 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
             "name": "郝邵文",
             "area": "台湾",
             "id": ""
+        },
+        {
+            "name": "NANA",
+            "area": "日本",
+            "id": "2"
         },
         {
             "name": "尖峰时刻",

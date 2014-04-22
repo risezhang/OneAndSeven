@@ -57,7 +57,7 @@ Bear.utils = (function(doc) {
         } else if (event.currentTarget.id == 'filter' && event.target.className == 'item') {
             var smallHTML = this.getSmallHTML(this.data, event.target.getAttribute('data-filter'), event.target.innerHTML)
             smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
-        } else if (event.currentTarget.id == 'small' && event.target.className == 'item') {
+        } else if (event.currentTarget.id == 'small' && event.target.className.indexOf('item') !== -1) {
             var tagid = event.target.getAttribute('data-id')
             if (tagid) {
                 this.small.setAttribute('data-currentid', tagid)
@@ -74,11 +74,11 @@ Bear.utils = (function(doc) {
         var part = ''
 
         for (var i = 0, l = data.list.length; i < l; i++) {
-            part += '<li class="item"'
+            part += '<li class="item'
             if (data.list[i].id) {
-                part += ' data-id="' + data.list[i].id + '"'
+                part += ' hasArticle" data-id="' + data.list[i].id
             }
-            part += '>' + data.list[i].name
+            part += '">' + data.list[i].name
             if (data.list[i].link) {
                 part += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
             }
@@ -115,7 +115,7 @@ Bear.utils = (function(doc) {
                     for (var i = 0, l = articles.length; i < l; i++) {
                         switch (articles[i].type) {
                             case 'picture':
-                                articlesHTML += '<article class="module-picture"><img src="' + articles[i].content + '"></article>'
+                                articlesHTML += '<article class="module module-picture"><img class="picture" src="' + articles[i].content + '"></article>'
                                 break
                         }
                     }

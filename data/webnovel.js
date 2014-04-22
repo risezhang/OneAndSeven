@@ -88,7 +88,7 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
         },
         {
             "name": "到开封府混个公务员",
-            "id": ""
+            "id": "3"
         },
         {
             "name": "半步多欲望传说",

@@ -56,9 +56,22 @@ body {
     border-right: 1px solid #ddd;
 }
 #small .item {
+    position: relative;
     padding-right: 0.5em;
     padding-left: 0.5em;
     cursor: pointer;
+}
+#small .hasArticle::before {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+    content: "";
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-width: 4px 0 4px 6px;
+    border-color: transparent #000;
+    border-style: dashed solid;
 }
 #small .link {
     margin-left: 0.5em;
@@ -66,5 +79,14 @@ body {
 
 #mini {
     margin-left: 603px;
-    padding: 0.5em;
+}
+
+.module {
+    margin: 0.5em;
+    padding: 13px;
+    border: 1px solid #ddd;
+}
+.module .picture {
+    max-width: 100%;
+    display: block;
 }
