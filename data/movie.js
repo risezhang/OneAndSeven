@@ -6,6 +6,11 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
     },
     "list": [
         {
+            "name": "燕尾蝶",
+            "area": "日本",
+            "id": ""
+        },
+        {
             "name": "周星驰",
             "area": "香港",
             "id": ""
