@@ -5,6 +5,12 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
         "area": ["日本", "美国", "香港"]
     },
     "list": [
+    	{
+            "name": "圣子到",
+            "area": "日本",
+            "id": "",
+            "time": "2014/04/26"
+        },
         {
             "name": "虫师",
             "area": "日本",
