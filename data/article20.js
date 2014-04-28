@@ -69,6 +69,33 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
                     "content": "uploads/4_2.jpg"
                 }
             ]
+        },
+        {
+            "tagid": 5,
+            "tagname": "冰与火之歌:权力的游戏",
+            "article": [
+                {
+                    "type": "progress",
+                    "content": [
+                        {
+                            "name": "第一季",
+                            "episodes": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+                        },
+                        {
+                            "name": "第二季",
+                            "episodes": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+                        },
+                        {
+                            "name": "第三季",
+                            "episodes": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+                        },
+                        {
+                            "name": "第四季",
+                            "episodes": ["01|done", "02", "03"]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -6,10 +6,10 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
     },
     "list": [
         {
-            "name": "冰与火之歌:权力的游戏 第4季01 双剑",
+            "name": "冰与火之歌:权力的游戏",
             "area": "美国",
             "time": "2014/04/08",
-            "id": ""
+            "id": "5"
         },
         {
             "name": "来自星星的你",

@@ -12,6 +12,9 @@ a {
 body {
     line-height: 1.6;
 }
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+}
 
 #large {
     position: fixed;
@@ -89,4 +92,23 @@ body {
 .module .picture {
     max-width: 100%;
     display: block;
+}
+.module-progress {
+    line-height: 30px;
+}
+.module-progress h2 {
+    font-weight: normal;
+}
+.module-progress li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: -1px;
+    border: 1px solid #ddd;
+    color: #999;
+    text-align: center;    
+}
+.module-progress .done {
+    background: green;
+    color: #000;
 }

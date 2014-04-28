@@ -117,6 +117,27 @@ Bear.utils = (function(doc) {
                             case 'picture':
                                 articlesHTML += '<article class="module module-picture"><img class="picture" src="' + articles[i].content + '"></article>'
                                 break
+                            case 'progress':
+                                var subList = articles[i].content
+                                var subHTML = ''
+                                for (var j = 0, len = subList.length; j < len; j++) {
+                                    var subsubList = subList[j].episodes
+                                    var subsubHTML = ''
+                                    for (var k = 0, max = subsubList.length; k < max; k++) {
+                                        if (subsubList[k].indexOf('done') != -1) {
+                                            subsubHTML += '<li class="done">' + subsubList[k].split('|')[0] + '</li>'
+                                        } else {
+                                            subsubHTML += '<li>' + subsubList[k] + '</li>'
+                                        }
+                                    }
+                                    
+                                    subsubHTML = '<ul>' + subsubHTML + '</ul>'
+                                    subsubHTML = (subList[j].name ? '<h2>' + subList[j].name + '</h2>' : '') + subsubHTML
+                                    subHTML += subsubHTML
+                                }
+
+                                articlesHTML = '<article class="module module-progress">' +subHTML + '</article>'
+                                break
                         }
                     }
                     this.mini.innerHTML = articlesHTML
