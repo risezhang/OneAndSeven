@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5,h6 {
     top: 0;
     bottom: 0;
     left: 402px;
-    width: 200px;
+    width: 300px;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #ddd;
@@ -63,6 +63,11 @@ h1,h2,h3,h4,h5,h6 {
     padding-right: 0.5em;
     padding-left: 0.5em;
     cursor: pointer;
+}
+#small .hasPicture {
+    margin: 0.5em;
+    padding: 13px;
+    border: 1px solid #ddd;
 }
 #small .hasArticle::before {
     position: absolute;
@@ -76,12 +81,15 @@ h1,h2,h3,h4,h5,h6 {
     border-color: transparent #000;
     border-style: dashed solid;
 }
+#small img {
+    max-width: 100%;
+}
 #small .link {
     margin-left: 0.5em;
 }
 
 #mini {
-    margin-left: 603px;
+    margin-left: 703px;
 }
 
 .module {

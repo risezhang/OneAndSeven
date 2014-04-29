@@ -13,7 +13,8 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
         {
             "name": "康熙来了",
             "area": "台湾",
-            "id": ""
+            "picture": "uploads/6_0.png",
+            "id": "6"
         },
         {
             "name": "晓说",

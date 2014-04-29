@@ -74,11 +74,21 @@ Bear.utils = (function(doc) {
         var part = ''
 
         for (var i = 0, l = data.list.length; i < l; i++) {
+            if (data.list[i].picture) {
+
+            }
             part += '<li class="item'
-            if (data.list[i].id) {
+            if (data.list[i].picture) {
+                part += ' hasPicture'
+            }
+            if (data.list[i].hasArticle) {
                 part += ' hasArticle" data-id="' + data.list[i].id
             }
-            part += '">' + data.list[i].name
+            part += '">'
+            if (data.list[i].picture) {
+                part += '<img src="' + data.list[i].picture + '">'
+            }
+            part += data.list[i].name
             if (data.list[i].link) {
                 part += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
             }

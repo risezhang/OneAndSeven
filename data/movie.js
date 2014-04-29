@@ -23,6 +23,7 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
         {
             "name": "NANA",
             "area": "日本",
+            "hasArticle": true,
             "id": "2"
         },
         {

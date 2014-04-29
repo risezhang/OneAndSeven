@@ -10,6 +10,7 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
         {
             "name": "CONVERSE",
             "id": "4",
+            "hasArticle": true,
             "link": "http://www.converse.com.cn/"
         },
         {
