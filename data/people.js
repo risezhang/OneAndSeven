@@ -5,7 +5,8 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
 		{
             "name": "水原希子",
             "picture": "uploads/7_0.gif",
-            "id": ""
+            "hasArticle": true,
+            "id": "7"
         }
     ]
 }

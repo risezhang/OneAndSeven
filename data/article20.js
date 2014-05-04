@@ -96,7 +96,37 @@ Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
                     ]
                 }
             ]
-        }
+        },
+        {
+            "tagid": 7,
+            "tagname": "水原希子",
+            "article": [
+                {
+                    "type": "picture",
+                    "content": "uploads/7_1.jpg"
+                },
+                {
+                    "type": "picture",
+                    "content": "uploads/7_2.jpg"
+                },
+                {
+                    "type": "picture",
+                    "content": "uploads/7_3.jpg"
+                },
+                {
+                    "type": "picture",
+                    "content": "uploads/7_4.jpg"
+                },
+                {
+                    "type": "picture",
+                    "content": "uploads/7_5.jpg"
+                },
+                {
+                    "type": "picture",
+                    "content": "uploads/7_6.jpg"
+                }
+            ]
+        },
     ]
 }
 )

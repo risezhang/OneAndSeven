@@ -39,33 +39,66 @@ Bear.utils = (function(doc) {
 
 +function(Bear, doc) {
     var Island = function() {
-        this.large = doc.getElementById('large')
-        this.filter = doc.getElementById('filter')
-        this.small = doc.getElementById('small')
-        this.mini = doc.getElementById('mini')
         this.data = null
 
         this.init()
     }
 
+    Island.prototype.init = function() {
+        this.large = doc.getElementById('large')
+        this.filter = doc.getElementById('filter')
+        this.small = doc.getElementById('small')
+        this.mini = doc.getElementById('mini')
+
+        this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
+        this.filter.addEventListener('click', this.proxy(this.handleEvent, this), false)
+        this.small.addEventListener('click', this.proxy(this.handleEvent, this), false)
+    }
+
+    Island.prototype.getCurrentItem = function(event) {
+        var target = event.target
+
+        while (target.className.indexOf('item') === -1) {
+            target = target.parentNode
+            if (target == document.body) {
+                break;
+            }   
+        }
+
+        return target
+    }
+
     Island.prototype.handleEvent = function(event) {
-        if (event.currentTarget.id == 'large' && event.target.className == 'item') {
-            Bear.utils.loadScript('data/' + event.target.getAttribute('data-id') + '.js', function(script) {
-                script.parentNode.removeChild(script)
-                script = null
-            })
-        } else if (event.currentTarget.id == 'filter' && event.target.className == 'item') {
-            var smallHTML = this.getSmallHTML(this.data, event.target.getAttribute('data-filter'), event.target.innerHTML)
-            smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
-        } else if (event.currentTarget.id == 'small' && event.target.className.indexOf('item') !== -1) {
-            var tagid = event.target.getAttribute('data-id')
-            if (tagid) {
-                this.small.setAttribute('data-currentid', tagid)
-                Bear.utils.loadScript('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js', function(script) {
-                    script.parentNode.removeChild(script)
-                    script = null
-                }) 
-            }
+        switch (event.currentTarget.id) {
+            case 'large':
+                var target = this.getCurrentItem(event)
+                if (target.className.indexOf('item') !== -1) {
+                    Bear.utils.loadScript('data/' + target.getAttribute('data-id') + '.js', function(script) {
+                        script.parentNode.removeChild(script)
+                        script = null
+                    })
+                }
+                break
+            case 'filter':
+                var target = this.getCurrentItem(event)
+                if (target.className.indexOf('item') !== -1) {
+                    var smallHTML = this.getSmallHTML(this.data, target.getAttribute('data-filter'), event.target.innerHTML)
+                    smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
+                }
+                break
+            case 'small':
+                var target = this.getCurrentItem(event)
+                if (target.className.indexOf('item') !== -1) {
+                    var tagid = target.getAttribute('data-id')
+                    if (tagid) {
+                        this.small.setAttribute('data-currentid', tagid)
+                        Bear.utils.loadScript('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js', function(script) {
+                            script.parentNode.removeChild(script)
+                            script = null
+                        }) 
+                    }
+                }
+                break
         }
     }
 
@@ -74,24 +107,13 @@ Bear.utils = (function(doc) {
         var part = ''
 
         for (var i = 0, l = data.list.length; i < l; i++) {
-            if (data.list[i].picture) {
-
-            }
             part += '<li class="item'
-            if (data.list[i].picture) {
-                part += ' hasPicture'
-            }
-            if (data.list[i].hasArticle) {
-                part += ' hasArticle" data-id="' + data.list[i].id
-            }
+            part += data.list[i].picture ? ' hasPicture' : ''
+            part += data.list[i].hasArticle ? ' hasArticle" data-id="' + data.list[i].id : ''
             part += '">'
-            if (data.list[i].picture) {
-                part += '<img src="' + data.list[i].picture + '">'
-            }
+            part += data.list[i].picture ? '<img src="' + data.list[i].picture + '">' : ''
             part += data.list[i].name
-            if (data.list[i].link) {
-                part += '<a class="link" href="' + data.list[i].link + '">&#8674;</a>'
-            }
+            part += data.list[i].link ? '<a class="link" href="' + data.list[i].link + '">&#8674;</a>' : ''
             part += '</li>'
             if (key && value && data.list[i][key] != value) {
                 part = ''
@@ -109,10 +131,30 @@ Bear.utils = (function(doc) {
         }
     }
 
-    Island.prototype.init = function() {
-        this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
-        this.filter.addEventListener('click', this.proxy(this.handleEvent, this), false)
-        this.small.addEventListener('click', this.proxy(this.handleEvent, this), false)
+    Island.prototype.getPictureHTML = function(content) {
+        return '<article class="module module-picture"><img class="picture" src="' + content + '"></article>'
+    }
+
+    Island.prototype.getProgressHTML = function(content) {
+        var subList = content
+        var subHTML = ''
+        for (var i = 0, len = subList.length; i < len; i++) {
+            var subsubList = subList[i].episodes
+            var subsubHTML = ''
+            for (var j = 0, max = subsubList.length; j < max; j++) {
+                if (subsubList[j].indexOf('done') != -1) {
+                    subsubHTML += '<li class="done">' + subsubList[j].split('|')[0] + '</li>'
+                } else {
+                    subsubHTML += '<li>' + subsubList[j] + '</li>'
+                }
+            }
+            
+            subsubHTML = '<ul>' + subsubHTML + '</ul>'
+            subsubHTML = (subList[i].name ? '<h2>' + subList[i].name + '</h2>' : '') + subsubHTML
+            subHTML += subsubHTML
+        }
+        return '<article class="module module-progress">' +subHTML + '</article>'
+
     }
 
     Island.prototype.jsonpCallback = function(data) {
@@ -125,28 +167,10 @@ Bear.utils = (function(doc) {
                     for (var i = 0, l = articles.length; i < l; i++) {
                         switch (articles[i].type) {
                             case 'picture':
-                                articlesHTML += '<article class="module module-picture"><img class="picture" src="' + articles[i].content + '"></article>'
+                                articlesHTML += this.getPictureHTML(articles[i].content)
                                 break
                             case 'progress':
-                                var subList = articles[i].content
-                                var subHTML = ''
-                                for (var j = 0, len = subList.length; j < len; j++) {
-                                    var subsubList = subList[j].episodes
-                                    var subsubHTML = ''
-                                    for (var k = 0, max = subsubList.length; k < max; k++) {
-                                        if (subsubList[k].indexOf('done') != -1) {
-                                            subsubHTML += '<li class="done">' + subsubList[k].split('|')[0] + '</li>'
-                                        } else {
-                                            subsubHTML += '<li>' + subsubList[k] + '</li>'
-                                        }
-                                    }
-                                    
-                                    subsubHTML = '<ul>' + subsubHTML + '</ul>'
-                                    subsubHTML = (subList[j].name ? '<h2>' + subList[j].name + '</h2>' : '') + subsubHTML
-                                    subHTML += subsubHTML
-                                }
-
-                                articlesHTML = '<article class="module module-progress">' +subHTML + '</article>'
+                                articlesHTML += this.getProgressHTML(articles[i].content)
                                 break
                         }
                     }
