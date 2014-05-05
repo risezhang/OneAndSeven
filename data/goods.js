@@ -1,4 +1,4 @@
-Bear.island(document.getElementById('loveandpeace')).jsonpCallback(
+jsonp10000000(
 {
     "type": "goods",
     "list": [

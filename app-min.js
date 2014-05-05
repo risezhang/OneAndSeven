@@ -3,35 +3,37 @@ var Bear = {};
 Bear.utils = (function(doc) {
     var obj = {}
 
-    obj.loadScript = function(url, callback) {
-        var script = doc.createElement('script')
-
+    obj.jsonp = function(url, callback) {
+        var script = document.createElement('script')
+        //var callbackName = "jsonp" + (new Date).getTime()
+        var callbackName = "jsonp10000000"
+        script.type = "text/javascript"
+        script.src = url + '&callback=' + callbackName
+        window[callbackName] = function(data) {
+            callback && callback(data)
+        }
+        var destroy = function() {
+            try {
+                delete window[callbackName]
+            } catch (a) {
+                window[callbackName] = null
+            }
+            script.parentNode.removeChild(script)
+            script = null
+        }
         if (script.readyState) {
             script.onreadystatechange = function () {
                 if (script.readyState == 'loaded' || script.readyState == 'complete') {
                     script.onreadystatechange = null
-                    callback(script)
+                    destroy()
                 }
-            };
+            }
         } else {
             script.onload = function () {
-                callback(script)
+                destroy()
             }
         }
-
-        script.src = url
-        doc.body.appendChild(script)
-    }
-
-    obj.loadScriptString = function(code, callback) {
-        var script = doc.createElement('script')
-        try {
-            script.appendChild(doc.createTextNode(code))
-        } catch(ex) {
-            script.text = code
-        }
-        doc.body.appendChild(script)
-        callback(script)
+        document.getElementsByTagName("head")[0].appendChild(script)
     }
 
     return obj
@@ -73,10 +75,8 @@ Bear.utils = (function(doc) {
             case 'large':
                 var target = this.getCurrentItem(event)
                 if (target.className.indexOf('item') !== -1) {
-                    Bear.utils.loadScript('data/' + target.getAttribute('data-id') + '.js', function(script) {
-                        script.parentNode.removeChild(script)
-                        script = null
-                    })
+
+                    Bear.utils.jsonp('data/' + target.getAttribute('data-id') + '.js?', this.proxy(this.jsonpCallback, this))
                 }
                 break
             case 'filter':
@@ -92,10 +92,7 @@ Bear.utils = (function(doc) {
                     var tagid = target.getAttribute('data-id')
                     if (tagid) {
                         this.small.setAttribute('data-currentid', tagid)
-                        Bear.utils.loadScript('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js', function(script) {
-                            script.parentNode.removeChild(script)
-                            script = null
-                        }) 
+                        Bear.utils.jsonp('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js?', this.proxy(this.jsonpCallback, this)) 
                     }
                 }
                 break
