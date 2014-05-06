@@ -1,26 +1,31 @@
 var Bear = {};
 
-Bear.utils = (function(doc) {
+Bear.Utils = (function() {
     var obj = {}
 
-    obj.jsonp = function(url, callback) {
-        var script = document.createElement('script')
+    obj.getJSONP = function(url, success) {
+        var doc = document
+
+        var script = doc.createElement('script')
         //var callbackName = "jsonp" + (new Date).getTime()
         var callbackName = "jsonp10000000"
         script.type = "text/javascript"
         script.src = url + '&callback=' + callbackName
+
         window[callbackName] = function(data) {
-            callback && callback(data)
+            success && success(data)
         }
+
         var destroy = function() {
             try {
                 delete window[callbackName]
-            } catch (a) {
+            } catch (err) {
                 window[callbackName] = null
             }
             script.parentNode.removeChild(script)
             script = null
         }
+
         if (script.readyState) {
             script.onreadystatechange = function () {
                 if (script.readyState == 'loaded' || script.readyState == 'complete') {
@@ -33,13 +38,30 @@ Bear.utils = (function(doc) {
                 destroy()
             }
         }
-        document.getElementsByTagName("head")[0].appendChild(script)
+
+        doc.getElementsByTagName("head")[0].appendChild(script)
+    }
+
+    obj.getHandledTargetByClassName = function(currentTarget, target, className) {
+        while (target.className.indexOf(className) === -1) {
+            target = target.parentNode
+            if (target == currentTarget) {
+                break
+            }
+        }
+        return target
+    }
+
+    obj.proxy = function(fn, context) {
+        return function(event) {
+            return fn.apply(context, arguments)
+        }
     }
 
     return obj
-})(document);
+})();
 
-+function(Bear, doc) {
++function(Bear) {
     var Island = function() {
         this.data = null
 
@@ -47,53 +69,36 @@ Bear.utils = (function(doc) {
     }
 
     Island.prototype.init = function() {
-        this.large = doc.getElementById('large')
-        this.filter = doc.getElementById('filter')
-        this.small = doc.getElementById('small')
-        this.mini = doc.getElementById('mini')
+        this.large  = document.getElementById('large')
+        this.filter = document.getElementById('filter')
+        this.small  = document.getElementById('small')
+        this.mini   = document.getElementById('mini')
 
-        this.large.addEventListener('click', this.proxy(this.handleEvent, this), false)
-        this.filter.addEventListener('click', this.proxy(this.handleEvent, this), false)
-        this.small.addEventListener('click', this.proxy(this.handleEvent, this), false)
-    }
-
-    Island.prototype.getCurrentItem = function(event) {
-        var target = event.target
-
-        while (target.className.indexOf('item') === -1) {
-            target = target.parentNode
-            if (target == document.body) {
-                break;
-            }   
-        }
-
-        return target
+        this.large.addEventListener('click',  Bear.Utils.proxy(this.handleEvent, this), false)
+        this.filter.addEventListener('click', Bear.Utils.proxy(this.handleEvent, this), false)
+        this.small.addEventListener('click',  Bear.Utils.proxy(this.handleEvent, this), false)
     }
 
     Island.prototype.handleEvent = function(event) {
-        switch (event.currentTarget.id) {
-            case 'large':
-                var target = this.getCurrentItem(event)
-                if (target.className.indexOf('item') !== -1) {
+        var currentTarget = event.currentTarget
+        var target = event.target
 
-                    Bear.utils.jsonp('data/' + target.getAttribute('data-id') + '.js?', this.proxy(this.jsonpCallback, this))
-                }
+        switch (currentTarget.id) {
+            case 'large':
+                var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')
+                Bear.Utils.getJSONP('data/' + handledTarget.getAttribute('data-id') + '.js?', Bear.Utils.proxy(this.jsonpCallback, this))
                 break
             case 'filter':
-                var target = this.getCurrentItem(event)
-                if (target.className.indexOf('item') !== -1) {
-                    var smallHTML = this.getSmallHTML(this.data, target.getAttribute('data-filter'), event.target.innerHTML)
-                    smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
-                }
+                var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')
+                var smallHTML = this.getSmallHTML(this.data, handledTarget.getAttribute('data-filter'), target.innerHTML)
+                smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
                 break
             case 'small':
-                var target = this.getCurrentItem(event)
-                if (target.className.indexOf('item') !== -1) {
-                    var tagid = target.getAttribute('data-id')
-                    if (tagid) {
-                        this.small.setAttribute('data-currentid', tagid)
-                        Bear.utils.jsonp('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js?', this.proxy(this.jsonpCallback, this)) 
-                    }
+                var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')
+                var tagid = handledTarget.getAttribute('data-id')
+                if (tagid) {
+                    this.small.setAttribute('data-currentid', tagid)
+                    Bear.Utils.getJSONP('data/article' + (Math.floor(tagid / 20) * 20 + 20) + '.js?', Bear.Utils.proxy(this.jsonpCallback, this)) 
                 }
                 break
         }
@@ -104,17 +109,22 @@ Bear.utils = (function(doc) {
         var part = ''
 
         for (var i = 0, l = data.list.length; i < l; i++) {
+            var current = data.list[i]
+
             part += '<li class="item'
-            part += data.list[i].picture ? ' hasPicture' : ''
-            part += data.list[i].hasArticle ? ' hasArticle" data-id="' + data.list[i].id : ''
+            part += current.picture ? ' hasPicture' : ''
+            part += current.hasArticle ? ' hasArticle" data-id="' + current.id : ''
             part += '">'
-            part += data.list[i].picture ? '<img src="' + data.list[i].picture + '">' : ''
-            part += data.list[i].name
-            part += data.list[i].link ? '<a class="link" href="' + data.list[i].link + '">&#8674;</a>' : ''
+            part += current.picture ? '<img src="' + current.picture + '"><span class="name">' : ''
+            part += current.name
+            part += current.picture ? '</span>' : ''
+            part += current.link ? '<a class="link" href="' + current.link + '">&#8674;</a>' : ''
             part += '</li>'
-            if (key && value && data.list[i][key] != value) {
+
+            if (key && value && current[key] != value) {
                 part = ''
             }
+
             html += part
             part = ''           
         }
@@ -122,35 +132,32 @@ Bear.utils = (function(doc) {
         return html
     }
 
-    Island.prototype.proxy = function(fn, context) {
-        return function(event) {
-            return fn.apply(context, arguments)
-        }
-    }
-
     Island.prototype.getPictureHTML = function(content) {
         return '<article class="module module-picture"><img class="picture" src="' + content + '"></article>'
     }
 
     Island.prototype.getProgressHTML = function(content) {
-        var subList = content
-        var subHTML = ''
-        for (var i = 0, len = subList.length; i < len; i++) {
-            var subsubList = subList[i].episodes
-            var subsubHTML = ''
-            for (var j = 0, max = subsubList.length; j < max; j++) {
-                if (subsubList[j].indexOf('done') != -1) {
-                    subsubHTML += '<li class="done">' + subsubList[j].split('|')[0] + '</li>'
+        var parts = content
+        var partsHTML = ''
+
+        for (var i = 0, len = parts.length; i < len; i++) {
+            var episodes = parts[i].episodes
+            var episodesHTML = ''
+
+            for (var j = 0, max = episodes.length; j < max; j++) {
+                if (episodes[j].indexOf('done') != -1) {
+                    episodesHTML += '<li class="done">' + episodes[j].split('|')[0] + '</li>'
                 } else {
-                    subsubHTML += '<li>' + subsubList[j] + '</li>'
+                    episodesHTML += '<li>' + episodes[j] + '</li>'
                 }
             }
             
-            subsubHTML = '<ul>' + subsubHTML + '</ul>'
-            subsubHTML = (subList[i].name ? '<h2>' + subList[i].name + '</h2>' : '') + subsubHTML
-            subHTML += subsubHTML
+            episodesHTML = '<ul>' + episodesHTML + '</ul>'
+            episodesHTML = (parts[i].name ? '<h2>' + parts[i].name + '</h2>' : '') + episodesHTML
+            partsHTML += episodesHTML
         }
-        return '<article class="module module-progress">' +subHTML + '</article>'
+
+        return '<article class="module module-progress">' +partsHTML + '</article>'
 
     }
 
@@ -160,25 +167,25 @@ Bear.utils = (function(doc) {
             for (var i = 0, l = data.list.length; i < l; i++) {
                 if (data.list[i].tagid == currentid) {
                     var articles = data.list[i].article
-                    var articlesHTML = ''
+                    var html = ''
                     for (var i = 0, l = articles.length; i < l; i++) {
                         switch (articles[i].type) {
                             case 'picture':
-                                articlesHTML += this.getPictureHTML(articles[i].content)
+                                html += this.getPictureHTML(articles[i].content)
                                 break
                             case 'progress':
-                                articlesHTML += this.getProgressHTML(articles[i].content)
+                                html += this.getProgressHTML(articles[i].content)
                                 break
                         }
                     }
-                    this.mini.innerHTML = articlesHTML
+                    this.mini.innerHTML = html 
                     break
                 }
             }
         } else {
             var smallHTML = this.getSmallHTML(data, null, null)
-
             var filterHTML = ''
+
             if (data.filter) {
                 if (data.filter.area) {
                     for (var i = 0, l = data.filter.area.length; i < l; i++) {
@@ -187,16 +194,8 @@ Bear.utils = (function(doc) {
                 }
             }
 
-            if (filterHTML) {
-                this.filter.innerHTML = '<ul>' + filterHTML + '</ul>'
-            } else {
-                this.filter.innerHTML = ''
-            }
-            if (smallHTML) {
-                this.small.innerHTML = '<ul>' + smallHTML + '</ul>'
-            } else {
-                this.small.innerHTML = ''
-            }
+            this.filter.innerHTML = filterHTML ? '<ul>' + filterHTML + '</ul>' : ''
+            this.small.innerHTML  = smallHTML  ? '<ul>' + smallHTML  + '</ul>' : ''
 
             this.data = data
         }
@@ -208,6 +207,6 @@ Bear.utils = (function(doc) {
         }
         return element.island
     }
-}(Bear, document);
+}(Bear);
 
 Bear.island(document.getElementById('loveandpeace'))
