@@ -5,7 +5,7 @@ jsonp10000000(
 		{
             "name": "水原希子",
             "picture": "uploads/7_0.gif",
-            "hasArticle": true,
+            "hasArticle": "1",
             "id": "7"
         }
     ]

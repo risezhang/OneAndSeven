@@ -3,6 +3,10 @@ jsonp10000000(
     "type": "webnovel",
     "list": [
         {
+            "name": "极品家丁",
+            "id": ""
+        },
+        {
             "name": "紫川",
             "id": ""
         },
@@ -88,7 +92,7 @@ jsonp10000000(
         },
         {
             "name": "到开封府混个公务员",
-            "hasArticle": true,
+            "hasArticle": "1",
             "id": "3"
         },
         {

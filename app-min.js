@@ -115,9 +115,9 @@ Bear.Utils = (function() {
             part += current.picture ? ' hasPicture' : ''
             part += current.hasArticle ? ' hasArticle" data-id="' + current.id : ''
             part += '">'
-            part += current.picture ? '<img src="' + current.picture + '"><span class="name">' : ''
+            part += current.picture ? '<div class="wrap"><img class="picture" src="' + current.picture + '"><span class="name">' : ''
             part += current.name
-            part += current.picture ? '</span>' : ''
+            part += current.picture ? '</span></div>' : ''
             part += current.link ? '<a class="link" href="' + current.link + '">&#8674;</a>' : ''
             part += '</li>'
 

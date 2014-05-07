@@ -9,7 +9,7 @@ jsonp10000000(
             "name": "冰与火之歌:权力的游戏",
             "area": "美国",
             "time": "2014/04/08",
-            "hasArticle": true,
+            "hasArticle": "1",
             "id": "5"
         },
         {
@@ -53,7 +53,7 @@ jsonp10000000(
             "name": "野猪大改造",
             "area": "日本",
             "time": "",
-            "hasArticle": true,
+            "hasArticle": "1",
             "id": "1"
         },
         {

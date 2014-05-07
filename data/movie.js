@@ -23,7 +23,7 @@ jsonp10000000(
         {
             "name": "NANA",
             "area": "日本",
-            "hasArticle": true,
+            "hasArticle": "1",
             "id": "2"
         },
         {

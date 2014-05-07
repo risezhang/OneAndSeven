@@ -2,18 +2,34 @@
     margin: 0;
     padding: 0;
 }
-ul {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+ul,
+ol {
     list-style: none;
 }
 a {
     text-decoration: none;
 }
+img {
+    border: none;
+}
 
 body {
     line-height: 1.6;
 }
-h1,h2,h3,h4,h5,h6 {
-    font-size: 100%;
+img {
+    max-width: 100%;
+}
+
+.picture {
+    display: block;
 }
 
 #large {
@@ -64,14 +80,24 @@ h1,h2,h3,h4,h5,h6 {
     padding-left: 0.5em;
     cursor: pointer;
 }
+
 #small .hasPicture {
-    margin: 0.5em;
+    padding: 0.5em;
+}
+#small .hasPicture .wrap {
     padding: 13px;
     border: 1px solid #ddd;
 }
+#small .hasPicture .name {
+    position: absolute;
+    right: 1.8em;
+    bottom: 1.5em;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+}
 #small .hasArticle::before {
     position: absolute;
-    right: 3px;
+    right: 1px;
     top: 9px;
     content: "";
     width: 0;
@@ -81,9 +107,6 @@ h1,h2,h3,h4,h5,h6 {
     border-color: transparent #000;
     border-style: dashed solid;
 }
-#small img {
-    max-width: 100%;
-}
 #small .link {
     margin-left: 0.5em;
 }
@@ -91,16 +114,12 @@ h1,h2,h3,h4,h5,h6 {
 #mini {
     margin-left: 703px;
 }
-
 .module {
     margin: 0.5em;
     padding: 13px;
     border: 1px solid #ddd;
 }
-.module .picture {
-    max-width: 100%;
-    display: block;
-}
+
 .module-progress {
     line-height: 30px;
 }
@@ -118,5 +137,5 @@ h1,h2,h3,h4,h5,h6 {
 }
 .module-progress .done {
     background: green;
-    color: #000;
+    color: #fff;
 }

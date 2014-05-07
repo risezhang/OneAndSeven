@@ -10,7 +10,7 @@ jsonp10000000(
         {
             "name": "CONVERSE",
             "id": "4",
-            "hasArticle": true,
+            "hasArticle": "1",
             "link": "http://www.converse.com.cn/"
         },
         {
