@@ -90,7 +90,7 @@ Bear.Utils = (function() {
                 break
             case 'filter':
                 var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')
-                var smallHTML = this.getSmallHTML(this.data, handledTarget.getAttribute('data-filter'), target.innerHTML)
+                var smallHTML = this.getSmallHTML(this.data, handledTarget.getAttribute('data-key'), handledTarget.getAttribute('data-value'))
                 smallHTML && (this.small.innerHTML = '<ul>' + smallHTML + '</ul>')
                 break
             case 'small':
@@ -118,7 +118,7 @@ Bear.Utils = (function() {
             part += current.picture ? '<div class="wrap"><img class="picture" src="' + current.picture + '"><span class="name">' : ''
             part += current.name
             part += current.picture ? '</span></div>' : ''
-            part += current.link ? '<a class="link" href="' + current.link + '">&#8674;</a>' : ''
+            part += current.link ? '<a class="link" href="' + current.link + '" target="_blank">&#8611;</a>' : ''
             part += '</li>'
 
             if (key && value && current[key] != value) {
@@ -189,8 +189,11 @@ Bear.Utils = (function() {
             if (data.filter) {
                 if (data.filter.area) {
                     for (var i = 0, l = data.filter.area.length; i < l; i++) {
-                        filterHTML += '<li class="item" data-filter="area">' + data.filter.area[i] + '</li>'
+                        filterHTML += '<li class="item" data-key="area" data-value="' + data.filter.area[i] + '">' + data.filter.area[i] + '</li>'
                     }
+                }
+                if (data.filter.hasArticle) {
+                    filterHTML += '<li class="item" data-key="hasArticle" data-value="1">有发表</li>'
                 }
             }
 

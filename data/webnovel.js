@@ -1,6 +1,9 @@
 jsonp10000000(
 {
     "type": "webnovel",
+    "filter": {
+        "hasArticle": "1"
+    },
     "list": [
         {
             "name": "极品家丁",

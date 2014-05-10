@@ -37,7 +37,7 @@ img {
     top: 0;
     bottom: 0;
     left: 0;
-    width: 200px;
+    width: 170px;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #ddd;
@@ -52,8 +52,8 @@ img {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 201px;
-    width: 200px;
+    left: 171px;
+    width: 170px;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #ddd;
@@ -68,7 +68,7 @@ img {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 402px;
+    left: 342px;
     width: 300px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -95,24 +95,13 @@ img {
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
-#small .hasArticle::before {
-    position: absolute;
-    right: 1px;
-    top: 9px;
-    content: "";
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    border-width: 4px 0 4px 6px;
-    border-color: transparent #000;
-    border-style: dashed solid;
-}
 #small .link {
     margin-left: 0.5em;
+    color: #999;
 }
 
 #mini {
-    margin-left: 703px;
+    margin-left: 643px;
 }
 .module {
     margin: 0.5em;

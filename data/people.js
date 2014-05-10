@@ -1,6 +1,9 @@
 jsonp10000000(
 {
     "type": "people",
+    "filter": {
+        "hasArticle": "1"
+    },
     "list": [
 		{
             "name": "水原希子",
