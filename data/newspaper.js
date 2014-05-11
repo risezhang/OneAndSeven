@@ -1,10 +1,14 @@
 jsonp10000000(
 {
     "type": "newspaper",
+    "filter": {
+        "hasArticle": "2"
+    },
     "list": [
         {
             "name": "电脑报",
-            "id": ""
+            "hasArticle": "1",
+            "id": "10"
         },
         {
             "name": "都市快报",
@@ -16,7 +20,8 @@ jsonp10000000(
         },
         {
             "name": "上海壹周",
-            "id": ""
+            "hasArticle": "1",
+            "id": "9"
         }
     ]
 }

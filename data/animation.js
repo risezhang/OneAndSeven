@@ -2,9 +2,17 @@ jsonp10000000(
 {
     "type": "animation",
     "filter": {
-        "area": ["日本", "美国", "香港"]
+        "area": ["日本", "美国", "香港"],
+        "rating": ["love", "good"]
     },
     "list": [
+        {
+            "name": "乒乓",
+            "area": "日本",
+            "rating": "good",
+            "id": "",
+            "time": "2014/05/10"
+        },
     	{
             "name": "圣子到",
             "area": "日本",
@@ -111,8 +119,9 @@ jsonp10000000(
             "id": ""
         },
         {
-            "name": "灌篮高手 HD",
+            "name": "灌篮高手",
             "area": "日本",
+            "rating": "love",
             "id": ""
         },
         {

@@ -127,6 +127,36 @@ jsonp10000000(
                 }
             ]
         },
+        {
+            "tagid": 8,
+            "tagname": "神雕侠侣",
+            "article": [
+                {
+                    "type": "picture",
+                    "content": "uploads/8_1.jpg"
+                }
+            ]
+        },
+        {
+            "tagid": 9,
+            "tagname": "上海壹周",
+            "article": [
+                {
+                    "type": "picture",
+                    "content": "uploads/9_1.jpg"
+                }
+            ]
+        },
+        {
+            "tagid": 10,
+            "tagname": "电脑报",
+            "article": [
+                {
+                    "type": "picture",
+                    "content": "uploads/10_1.jpg"
+                }
+            ]
+        }
     ]
 }
 )
