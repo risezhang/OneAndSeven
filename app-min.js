@@ -186,7 +186,7 @@ Bear.Utils = (function() {
             }
         } else {
             var smallHTML = this.getSmallHTML(data, null, null)
-            var filterHTML = ''
+            var filterHTML = '<li class="item" data-key="name" data-value="">所有</li>'
 
             if (data.filter) {
                 if (data.filter.rating) {
