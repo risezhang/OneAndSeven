@@ -103,7 +103,7 @@ img {
 #small .hasPicture .name {
     position: absolute;
     right: 1.8rem;
-    bottom: 1.5rem;
+    bottom: 1.25rem;
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
