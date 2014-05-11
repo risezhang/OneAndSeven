@@ -43,7 +43,7 @@ Bear.Utils = (function() {
     }
 
     obj.getHandledTargetByClassName = function(currentTarget, target, className) {
-        while (target.className.indexOf(className) === -1) {
+        while (target.className && target.className.indexOf(className) === -1) {
             target = target.parentNode
             if (target == currentTarget) {
                 break
@@ -86,7 +86,9 @@ Bear.Utils = (function() {
         switch (currentTarget.id) {
             case 'large':
                 var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')
-                Bear.Utils.getJSONP('data/' + handledTarget.getAttribute('data-id') + '.js?', Bear.Utils.proxy(this.jsonpCallback, this))
+                if (handledTarget.getAttribute('data-id')) {
+                    Bear.Utils.getJSONP('data/' + handledTarget.getAttribute('data-id') + '.js?', Bear.Utils.proxy(this.jsonpCallback, this))
+                }                
                 break
             case 'filter':
                 var handledTarget = Bear.Utils.getHandledTargetByClassName(currentTarget, target, 'item')

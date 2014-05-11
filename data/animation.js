@@ -9,9 +9,16 @@ jsonp10000000(
         {
             "name": "乒乓",
             "area": "日本",
+            "picture": "uploads/12_0.png",
             "rating": "good",
-            "id": "",
+            "id": "12",
             "time": "2014/05/10"
+        },
+        {
+            "name": "进击的巨人",
+            "area": "日本",
+            "picture": "uploads/11_0.png",
+            "id": "11",
         },
     	{
             "name": "圣子到",

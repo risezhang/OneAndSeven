@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+html {
+    font-size: 100%;
+}
 h1,
 h2,
 h3,
@@ -43,9 +46,12 @@ img {
     border-right: 1px solid #ddd;
 }
 #large .item {
-    padding-right: 0.5em;
-    padding-left: 0.5em;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     cursor: pointer;
+}
+#large .item:hover {
+    background: #ddd;
 }
 
 #filter {
@@ -59,9 +65,12 @@ img {
     border-right: 1px solid #ddd;
 }
 #filter .item {
-    padding-right: 0.5em;
-    padding-left: 0.5em;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     cursor: pointer;
+}
+#filter .item:hover {
+    background: #ddd;
 }
 
 #small {
@@ -76,13 +85,16 @@ img {
 }
 #small .item {
     position: relative;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     cursor: pointer;
+}
+#small .item:hover {
+    background: #ddd;
 }
 
 #small .hasPicture {
-    padding: 0.5em;
+    padding: 0.25rem 0.5rem;
 }
 #small .hasPicture .wrap {
     padding: 13px;
@@ -90,25 +102,53 @@ img {
 }
 #small .hasPicture .name {
     position: absolute;
-    right: 1.8em;
-    bottom: 1.5em;
+    right: 1.8rem;
+    bottom: 1.5rem;
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
 #small .link {
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
     color: #999;
 }
 
 #mini {
     margin-left: 643px;
+    margin-right: 71px;
 }
+
+#quick {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    border-left: 1px solid #ddd;
+    color: #999;
+    font-size: 2rem;
+    text-align: center;
+}
+#quick .item {
+    position: relative;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    cursor: pointer;
+}
+#quick .item:hover {
+    background: #ddd;
+}
+
 .module {
-    margin: 0.5em;
+    margin: 0.5rem;
     padding: 13px;
     border: 1px solid #ddd;
 }
-
+.module:first-child {
+    margin-top: 0.25rem
+}
+.module:last-child {
+    margin-bottom: 0.25rem
+}
 .module-progress {
     line-height: 30px;
 }
