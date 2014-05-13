@@ -3,7 +3,7 @@ jsonp10000000(
     "type": "music",
     "filter": {
         "area": ["台湾", "香港", "中国"],
-        "rating": ["love", "good"],
+        "rating": ["热爱", "不错"],
         "type": ["歌手", "专辑", "单曲"]
     },
     "list": [
@@ -251,7 +251,7 @@ jsonp10000000(
             "name": "my little airport",
             "area": "香港",
             "type": "歌手",
-            "rating": "love",
+            "rating": "热爱",
             "id": ""
         },
         {
@@ -294,14 +294,14 @@ jsonp10000000(
             "name": "Gorillaz",
             "area": "",
             "type": "歌手",
-            "rating": "good",
+            "rating": "不错",
             "id": ""
         },
         {
             "name": "松任谷由実40周年記念ベストアルバム 日本の恋と、ユーミンと",
             "area": "日本",
             "type": "专辑",
-            "rating": "good",
+            "rating": "不错",
             "id": ""
         },
         {

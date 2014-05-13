@@ -3,14 +3,14 @@ jsonp10000000(
     "type": "animation",
     "filter": {
         "area": ["日本", "美国", "香港"],
-        "rating": ["love", "good"]
+        "rating": ["热爱", "不错"]
     },
     "list": [
         {
             "name": "乒乓",
             "area": "日本",
             "picture": "uploads/12_0.png",
-            "rating": "good",
+            "rating": "不错",
             "id": "12",
             "time": "2014/05/10"
         },
@@ -128,7 +128,7 @@ jsonp10000000(
         {
             "name": "灌篮高手",
             "area": "日本",
-            "rating": "love",
+            "rating": "热爱",
             "id": ""
         },
         {

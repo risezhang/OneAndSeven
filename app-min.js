@@ -189,22 +189,22 @@ Bear.Utils = (function() {
             var filterHTML = '<li class="item" data-key="name" data-value="">所有</li>'
 
             if (data.filter) {
+                var i, l
                 if (data.filter.rating) {
-                    var word = ['&#10084;', '&#9733;']
-                    for (var i = 0, l = data.filter.rating.length; i < l; i++) {
-                        filterHTML += '<li class="item" data-key="rating" data-value="' + data.filter.rating[i] + '">' + word[i] + '</li>'
+                    for (i = 0, l = data.filter.rating.length; i < l; i++) {
+                        filterHTML += '<li class="item" data-key="rating" data-value="' + data.filter.rating[i] + '">' + data.filter.rating[i] + '</li>'
                     }
                 }
                 if (data.filter.hasArticle) {
                     filterHTML += '<li class="item" data-key="hasArticle" data-value="1">有发表</li>'
                 }
                 if (data.filter.area) {
-                    for (var i = 0, l = data.filter.area.length; i < l; i++) {
+                    for (i = 0, l = data.filter.area.length; i < l; i++) {
                         filterHTML += '<li class="item" data-key="area" data-value="' + data.filter.area[i] + '">' + data.filter.area[i] + '</li>'
                     }
                 }                
                 if (data.filter.type) {
-                    for (var i = 0, l = data.filter.type.length; i < l; i++) {
+                    for (i = 0, l = data.filter.type.length; i < l; i++) {
                         filterHTML += '<li class="item" data-key="type" data-value="' + data.filter.type[i] + '">' + data.filter.type[i] + '</li>'
                     }
                 }
